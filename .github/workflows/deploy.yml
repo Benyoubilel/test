@@ -5,15 +5,16 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deployer:
     runs-on: ubuntu-latest
     steps:
-      # Étape 1 : récupérer le code
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Étape 2 : valider le HTML
       - name: Vérifier index.html
         run: |
           if [ -f index.html ]; then
@@ -23,7 +24,6 @@ jobs:
             echo "❌ index.html manquant !" && exit 1
           fi
 
-      # Étape 3 : déployer sur GitHub Pages
       - name: Déployer
         uses: peaceiris/actions-gh-pages@v3
         with:
